@@ -1,6 +1,6 @@
 package src;
 
-public class TestMain {
+public class MainEntrance {
     public static void main(String[] args){
         BookMark bookmark=new BookMark();
         CommandController commandcontroller = new CommandController();

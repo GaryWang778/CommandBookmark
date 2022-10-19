@@ -12,4 +12,5 @@ class BookMarkNode{
 
 public class BookMarkTree{
     private BookMarkNode bookmarknode=null;
+
 }
