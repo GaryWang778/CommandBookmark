@@ -28,7 +28,8 @@ public class commandParse {
 
         }else if(commandline.contains("save")){
             //save指令
-            commandManager.executeCommand(new saveCommand());
+            String[] list = split(commandline);
+            commandManager.executeCommand(new saveCommand(list));
 
         }else if(commandline.contains("undo")){
             //undo指令
