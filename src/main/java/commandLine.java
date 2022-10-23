@@ -6,7 +6,7 @@ public class commandLine {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        // nextLine方式接收指令
+        // 接收指令
         System.out.println("please input order: ");
 
         while (scan.hasNextLine()) {
@@ -18,10 +18,11 @@ public class commandLine {
             }
 
             //调用指令解析模块
-
+            commandParse comParse = new commandParse(order);
+            comParse.comPraser();
 
             //依次输入指令
-            System.out.println("nextLine:");
+            System.out.println("nextLine: ");
         }
         scan.close();
     }

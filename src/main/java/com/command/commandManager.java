@@ -3,10 +3,10 @@ import java.util.Stack;
 
 //命令管理器，存储执行过的命令，同时实现redo与undo功能
 public class commandManager {
-    private Stack<Command> undoCommands = new Stack<>();
-    private Stack<Command> redoCommands = new Stack<>();
+    private static Stack<Command> undoCommands = new Stack<>();
+    private static Stack<Command> redoCommands = new Stack<>();
 
-    public void executeCommand(Command command) {
+    public static void executeCommand(Command command) {
         command.execute();
         undoCommands.push(command);
 
@@ -16,7 +16,7 @@ public class commandManager {
         }
     }
 
-    public void undo() {
+    public static void undo() {
         if(!undoCommands.isEmpty()) {
             Command command = undoCommands.pop();
             command.undo();
@@ -24,7 +24,7 @@ public class commandManager {
         }
     }
 
-    public void redo() {
+    public static void redo() {
         if(!redoCommands.isEmpty()) {
             Command command = redoCommands.pop();
             command.execute();

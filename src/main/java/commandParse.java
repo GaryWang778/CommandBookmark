@@ -1,26 +1,61 @@
-//命令解析模块，调用com.pattern.command包中的Client类,再通过该类进行指令的管理
+//命令解析模块
 
-import com.command.Client;
+import com.command.*;
 
 public class commandParse {
 
+    public String commandline;
+    public commandParse(String commandline){
+        this.commandline = commandline;
+    }
 
+    //根据空格对commandline进行划分
+    public String[] split(String commandline) {
+        return commandline.split("\\s+");
+    }
 
+    //对commandline的命令符进行判断
+    public void comPraser(){
+        if(commandline.contains("add")) {
+            //add指令
+            String[] list = split(commandline);
+            commandManager.executeCommand(new addCommand(list));
 
+        }else if(commandline.contains("delete")){
+            //delete指令
+            String[] list = split(commandline);
+            commandManager.executeCommand(new deleteCommand(list));
 
-    //add指令
+        }else if(commandline.contains("save")){
+            //save指令
+            commandManager.executeCommand(new saveCommand());
 
-    //delete指令
+        }else if(commandline.contains("undo")){
+            //undo指令
+            commandManager.undo();
 
-    //redo/undo指令
+        }else if(commandline.contains("redo")){
+            //redo指令
+            commandManager.undo();
 
-    //装入指令
+        }else if(commandline.contains("tree")){
+            //show-tree指令和ls-tree指令
+            commandManager.executeCommand(new vision());
 
-    //save指令
+        }else if(commandline.contains("read")){
+            //read-bookmark指令
+            String[] list = split(commandline);
+            commandManager.executeCommand(new readCommand(list));
+        }else if(commandline.contains("open")){
+            //open指令
+            String[] list = split(commandline);
+            commandManager.executeCommand(new loadCommand(list));
 
-    //可视化指令, show-tree/ls-tree
+        }else{
+            System.out.println("this commandline is not exit");
+        }
+    }
 
-    //read-bookmark指令
 
 
 }

@@ -1,6 +1,6 @@
 package com.command;
 
-public class savaCommand implements Command{
+public class saveCommand implements Command{
     @Override
     public void execute() {
         System.out.println("savaCommand is executed");
