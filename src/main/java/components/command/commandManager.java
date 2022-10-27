@@ -1,4 +1,5 @@
 package components.command;
+import dataStructure.Item;
 import dataStructure.Label;
 
 import java.util.Stack;
@@ -9,10 +10,11 @@ public class commandManager {
     private static Stack<Command> redoCommands = new Stack<>();
 
     //创建Label对象，存储数据
-    static Label data = new Label();
+    static Label bookMark = new Label();
+    private static Stack<Item> trashItem = new Stack<>();
 
     public static void executeCommand(Command command) {
-        command.execute(data);
+        command.execute(bookMark, trashItem);
         undoCommands.push(command);
 
         //当新的指令执行后，清除redo列表
@@ -24,7 +26,7 @@ public class commandManager {
     public static void undo() {
         if(!undoCommands.isEmpty()) {
             Command command = undoCommands.pop();
-            command.undo(data);
+            command.undo(bookMark, trashItem);
             redoCommands.push(command);
         }
     }
@@ -32,7 +34,7 @@ public class commandManager {
     public static void redo() {
         if(!redoCommands.isEmpty()) {
             Command command = redoCommands.pop();
-            command.execute(data);
+            command.execute(bookMark,trashItem);
         }
     }
 
