@@ -15,8 +15,8 @@ public class saveCommand implements Command{
         System.out.print(cmdName+"\n"+filePath+"\n");
     }
 
-    @Override
-    public void undo(Label bookMark) {
-        System.out.println("saveCommand is canceled");
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//        System.out.println("saveCommand is canceled");
+//    }
 }

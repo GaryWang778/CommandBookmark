@@ -30,8 +30,8 @@ public class deleteCommand implements Command{
 //
     }
 
-    @Override
-    public void undo(Label bookMark) {
-        System.out.println("deleteCommand is canceled");
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//        System.out.println("deleteCommand is canceled");
+//    }
 }

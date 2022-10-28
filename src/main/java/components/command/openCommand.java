@@ -17,8 +17,8 @@ public class openCommand implements Command{
         System.out.print(cmdName+"\n"+filePath+"\n");
     }
 
-    @Override
-    public void undo(Label bookMark) {
-
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//
+//    }
 }

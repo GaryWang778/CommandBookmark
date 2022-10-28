@@ -1,6 +1,5 @@
 package components.command;
 
-import dataStructure.Item;
 import dataStructure.Label;
 
 //具体命令接口之——add命令
@@ -40,8 +39,8 @@ public class addCommand implements Command {
 //
     }
 
-    @Override
-    public void undo(Label bookMark) {
-        System.out.println("addCommand is canceled");
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//        System.out.println("addCommand is canceled");
+//    }
 }

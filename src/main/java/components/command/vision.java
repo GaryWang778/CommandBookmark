@@ -10,9 +10,9 @@ public class vision implements Command{
         System.out.println("visionCommand is executed");
     }
 
-    @Override
-    public void undo(Label bookMark) {
-        System.out.println("visionCommand is canceled");
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//        System.out.println("visionCommand is canceled");
+//    }
 
 }

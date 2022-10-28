@@ -16,8 +16,8 @@ public class readCommand implements Command {
         System.out.print(cmdName+"\n"+boookmarkName+"\n");
 
     }
-    @Override
-    public void undo(Label bookMark) {
-        System.out.println("readCommand is canceled");
-    }
+//    @Override
+//    public void undo(Label bookMark) {
+//        System.out.println("readCommand is canceled");
+//    }
 }

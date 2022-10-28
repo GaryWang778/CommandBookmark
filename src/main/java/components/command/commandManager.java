@@ -1,38 +1,48 @@
 package components.command;
 import dataStructure.Label;
 
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
+
 
 //命令管理器，存储执行过的命令，同时实现redo与undo功能
 public class commandManager {
-    private static Stack<Command> undoCommands = new Stack<>();
-    private static Stack<Command> redoCommands = new Stack<>();
+
+    private static final List<Command> historyCommand = new ArrayList<>();
+    private static int commandPointer = 0;
 
     //创建Label对象，存储数据
     static Label data = new Label();
 
     public static void executeCommand(Command command) {
-        command.execute(data);
-        undoCommands.push(command);
-
-        //当新的指令执行后，清除redo列表
-        if(!redoCommands.isEmpty()) {
-            redoCommands.clear();
+        if((command instanceof addCommand) || (command instanceof deleteCommand)){
+            //新添加指令时，删除commandPointer之后的所有历史命令
+            for(int i=0;i<historyCommand.size()-commandPointer;i++){
+                historyCommand.remove(commandPointer+1);
+            }
+            historyCommand.add(command);
+            commandPointer += 1;
         }
+        command.execute(data);
+
     }
 
     public static void undo() {
-        if(!undoCommands.isEmpty()) {
-            Command command = undoCommands.pop();
-            command.undo(data);
-            redoCommands.push(command);
+        //检查数组不能越下界
+        if(commandPointer==0) {
+            System.out.print("已经undo所有命令，无法继续");
+        }else{
+            commandPointer--;
+            System.out.print("undo success!");
         }
     }
 
     public static void redo() {
-        if(!redoCommands.isEmpty()) {
-            Command command = redoCommands.pop();
-            command.execute(data);
+        if(commandPointer==historyCommand.size()-1){
+            System.out.print("已经redo所有命令，无法继续");
+        }else{
+            commandPointer++;
+            System.out.print("redo success!");
         }
     }
 
