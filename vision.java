@@ -18,11 +18,10 @@ public class vision implements Command{
             System.out.print('\t');
         for(int num=1;num<=item.level;num++) 
             System.out.print("#");
-        System.out.print(item.title + " level");
-        System.out.println(item.level);
+        System.out.println(item.title);
+        //System.out.println(item.level);
         if (temp1 != null)
             for(Item i : temp1){
-
                 showitem(i);
             }
     }
