@@ -38,7 +38,7 @@ public class commandParse {
 
         }else if(commandline.contains("redo")){
             //redo指令
-            commandManager.undo();
+            commandManager.redo();
 
         }else if(commandline.contains("tree")){
             //show-tree指令和ls-tree指令
