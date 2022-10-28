@@ -7,6 +7,7 @@ public class Item {
     public Item(){
         this.sons = new ArrayList<Item>();
         this.title = new String;
+        this.level = new int;
         this.bookmark = new String;
         this.hyperlink = new String;
         this.visited = new int;
