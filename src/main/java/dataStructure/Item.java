@@ -6,6 +6,10 @@ import java.util.ArrayList;
 public class Item {
     public Item(){
         this.sons = new ArrayList<Item>();
+        this.title = new String;
+        this.bookmark = new String;
+        this.hyperlink = new String;
+        this.visited = new int;
     }
     public String title;//书签的标题
     public int level;//书签的级别
