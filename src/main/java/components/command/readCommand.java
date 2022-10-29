@@ -1,6 +1,7 @@
 package components.command;
 import dataStructure.Item;
 import dataStructure.Label;
+import java.util.ArrayList;
 
 //实现read-bookMark功能
 public class readCommand implements Command{
@@ -9,8 +10,8 @@ public class readCommand implements Command{
     
     public readCommand(String[] list){
         cmdName = list[0];
-        if(cmdName.equals("read-bookMark "))
-            bookMarkName = list[1];
+        if(cmdName.equals("read-bookmark "))
+            bookmarkName = list[1];
     }
     
     @Override
@@ -23,7 +24,7 @@ public class readCommand implements Command{
         System.out.println("readCommand is executed");
     }
 
-    public static void read_mark(Item item,String name){//name是待读取的bookmarkName
+    public static void read_mark(Item item,String name){//name是待访问的bookmarkName
         if(item == null)
             return;
         if(item.bookmark == name){
