@@ -8,7 +8,7 @@ public class vision implements Command{
     @Override
     public void execute(Label bookMark) {
         //执行show-tree和ls-tree指令
-        ArrayList<Item> temp = label.items;
+        ArrayList<Item> temp = bookMark.items;
             for(Item i : temp){
                 showitem(i,1);
         System.out.println("visionCommand is executed");
