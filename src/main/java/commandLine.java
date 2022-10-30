@@ -24,7 +24,8 @@ public class commandLine {
             comParse.comPraser();
 
             //依次输入指令
-            System.out.println("nextLine: ");
+            System.out.println("\n");
+            System.out.println("please input order:  ");
         }
         scan.close();
     }

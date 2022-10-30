@@ -1,6 +1,7 @@
 //命令解析模块
 
 import components.command.*;
+import dataStructure.Label;
 
 public class commandParse {
 
