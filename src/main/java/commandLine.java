@@ -1,6 +1,5 @@
 //接收命令行的输入
 
-import dataStructure.Label;
 
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class commandLine {
 
             //调用指令解析模块
             commandParse comParse = new commandParse(order);
-            comParse.comPraser();
+            comParse.comParser();
 
             //依次输入指令
             System.out.println("\n");

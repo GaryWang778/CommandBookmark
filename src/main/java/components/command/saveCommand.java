@@ -4,8 +4,6 @@ import dataStructure.Item;
 import dataStructure.Label;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 //saveCommand：将Label中的数据刷新到文件中
@@ -42,7 +40,7 @@ public class saveCommand implements Command{
 
     }
     @Override
-    public void execute(Label bookMark, Stack<Item> trashItem) {
+    public void execute(Label bookMark) {
         //采用深度优先搜索算法
         //申请一个栈存储访问过的节点
         Stack<Item> DFS = new Stack<>();
@@ -71,16 +69,4 @@ public class saveCommand implements Command{
 
         System.out.print(cmdName+"\n"+filePath+"\n");
     }
-
-<<<<<<< HEAD
-//    @Override
-//    public void undo(Label bookMark) {
-//        System.out.println("saveCommand is canceled");
-//    }
-=======
-    @Override
-    public void undo(Label bookMark, Stack<Item> trashItem) {
-        System.out.println("saveCommand is canceled");
-    }
->>>>>>> deb93f26e8b7c44433fcb39a9a2fec6c2397c489
 }

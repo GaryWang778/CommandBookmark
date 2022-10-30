@@ -1,7 +1,5 @@
 //命令解析模块
-
 import components.command.*;
-import dataStructure.Label;
 
 public class commandParse {
 
@@ -16,7 +14,7 @@ public class commandParse {
     }
 
     //对commandline的命令符进行判断
-    public void comPraser(){
+    public void comParser(){
         if(commandline.contains("add")) {
             //add指令
             String[] list = split(commandline);

@@ -2,7 +2,7 @@ package components.command;
 
 import dataStructure.Label;
 
-import java.util.Stack;
+import dataStructure.Item;
 
 
 //具体命令接口之——add命令
@@ -29,7 +29,7 @@ public class addCommand implements Command {
     }
 
     @Override
-    public void execute(Label bookMark, Stack<Item> trashItem) {
+    public void execute(Label bookMark) {
         if(cmdName.equals("add-title ")){
             //执行add-title命令
             Item obj_t = new Item();
@@ -67,25 +67,5 @@ public class addCommand implements Command {
 //
     }
 
-<<<<<<< HEAD
-//    @Override
-//    public void undo(Label bookMark) {
-//        System.out.println("addCommand is canceled");
-//    }
-=======
-    @Override
-    public void undo(Label bookMark, Stack<Item> trashItem) {
-        if(cmdName.equals("add-title ") ){
-            String[] list_1 = {"delete-title ", titleName};
-            commandManager.executeCommand(new deleteCommand(list_1));
 
-        }else if(cmdName.equals("add-bookmark ")){
-            String[] list_2 = {"delete-bookmark ", bookmarkName};
-            commandManager.executeCommand(new deleteCommand(list_2));
-
-        }else{
-            System.out.print("this commandline is not exit");
-        }
-    }
->>>>>>> deb93f26e8b7c44433fcb39a9a2fec6c2397c489
 }

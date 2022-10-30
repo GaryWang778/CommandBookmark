@@ -46,12 +46,11 @@ public class deleteCommand implements Command{
     }
 
     @Override
-    public void execute(Label bookMark, Stack<Item> trashItem) {
+    public void execute(Label bookMark) {
         if (cmdName.equals("delete-title ")){
             //执行delete-title指令
             //根据titleName去查找对应<Item> obj_t,将其从Label中删除，并添加进Trash中
             Item obj_t = find_tit(bookMark, titleName);
-            trashItem.push(obj_t); //该<Item> obj_t添加进trash_bookMark中
             bookMark.items.remove(obj_t); //从Label中删除该<Item> obj_t
             for(Item obj_t_son : obj_t.sons){ //从Label中删除该obj_t的子节点
                 bookMark.items.remove(find_tit(bookMark, obj_t_son.title));
@@ -75,28 +74,4 @@ public class deleteCommand implements Command{
         }
 //
     }
-
-<<<<<<< HEAD
-//    @Override
-//    public void undo(Label bookMark) {
-//        System.out.println("deleteCommand is canceled");
-//    }
-=======
-    @Override
-    public void undo(Label bookMark, Stack<Item> trashItem) {
-        if (cmdName.equals("delete-title ")){
-            Item obj_t = trashItem.pop();
-            String[] list_1 = {"add-title ", obj_t.title," ", obj_t.parent_tit};
-            commandManager.executeCommand(new addCommand(list_1));
-
-        }else if (cmdName.equals("delete-bookmark ")){
-            Item obj_t = find_tit(bookMark, bookmarkname);
-            obj_t.hyperlink = hyperlinkNameStack.pop();
-            obj_t.bookmarkName = bookmarkNameStack.pop();
-
-        }else {
-            System.out.print("this commandline is not exit");
-        }
-    }
->>>>>>> deb93f26e8b7c44433fcb39a9a2fec6c2397c489
 }
