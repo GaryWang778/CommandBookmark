@@ -24,7 +24,7 @@ public class vision implements Command{
         for(int num=1;num<=level;num++) 
             System.out.print("#");
         System.out.print(item.title + '\t');
-        if(item.visited)
+        if(item.visited != 0)
             System.out.print("*");
         System.out.println(item.bookmark);
         if (temp1 != null)
