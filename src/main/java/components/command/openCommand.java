@@ -1,5 +1,4 @@
 package components.command;
-
 import dataStructure.Label;
 
 public class openCommand implements Command{
@@ -17,8 +16,5 @@ public class openCommand implements Command{
         System.out.print(cmdName+"\n"+filePath+"\n");
     }
 
-    @Override
-    public void undo(Label bookMark) {
 
-    }
 }

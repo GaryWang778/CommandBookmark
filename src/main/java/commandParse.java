@@ -1,5 +1,4 @@
 //命令解析模块
-
 import components.command.*;
 
 public class commandParse {
@@ -15,7 +14,7 @@ public class commandParse {
     }
 
     //对commandline的命令符进行判断
-    public void comPraser(){
+    public void comParser(){
         if(commandline.contains("add")) {
             //add指令
             String[] list = split(commandline);
@@ -37,7 +36,7 @@ public class commandParse {
 
         }else if(commandline.contains("redo")){
             //redo指令
-            commandManager.undo();
+            commandManager.redo();
 
         }else if(commandline.contains("tree")){
             //show-tree指令和ls-tree指令
