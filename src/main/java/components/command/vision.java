@@ -71,6 +71,7 @@ public class vision implements Command {
             System.out.print("[");
             if (item.visited != 0){ System.out.print("*"); }
             System.out.print(item.bookmarkName);
+            if (item.visited != 0){ System.out.print("["+item.visited+"]"); }
             System.out.print("]");
 
             System.out.print("(");
