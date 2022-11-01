@@ -8,7 +8,6 @@ public class Item {
         this.sons = new ArrayList<Item>();
     }
     public String title;//书签的标题
-    public String parent_tit;//该书签的父标题
     public String bookmarkName;//书签的描述，例如elearning Markdown Guide
     public String hyperlink;//书签的链接
     public ArrayList<Item> sons;//子书签

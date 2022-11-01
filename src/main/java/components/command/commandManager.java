@@ -1,4 +1,5 @@
 package components.command;
+import dataStructure.Item;
 import dataStructure.Label;
 
 import java.util.ArrayList;
@@ -11,10 +12,14 @@ public class commandManager {
     private static final List<Command> historyCommand = new ArrayList<>();
     private static int commandPointer = 0;//指向的是下个command存储的位置
 
-    //创建Label对象，存储数据
+    //创建Label对象，和根节点root
     static Label bookMark = new Label();
+    static Item root = new Item();
+
 
     public static void executeCommand(Command command) {
+        //将root根节点存储进Label
+        bookMark.items.add(root);
 
         if ((command instanceof addCommand) || (command instanceof deleteCommand)) {
             //新添加指令时，删除commandPointer及其之后的所有历史命令
@@ -23,17 +28,16 @@ public class commandManager {
             }
             historyCommand.add(command);
             commandPointer += 1;
-        }
-
-        //只有在执行save和show-tree指令时才会真正执行所有指令，并把最终的bookMark传入saveCommand和vision中
-        if ((command instanceof saveCommand)||command instanceof vision){
+        }else if (command instanceof saveCommand){
+            //只有输入save指令时才会执行所有指令
             for(int i = 0; i < commandPointer; i++){
                 Command commandtoExecute = historyCommand.get(i);
                 commandtoExecute.execute(bookMark);
             }
             command.execute(bookMark);
+        }else{
+            command.execute(bookMark);
         }
-
     }
 
     public static void undo() {
@@ -47,7 +51,6 @@ public class commandManager {
     }
 
     public static void redo() {
-
         if(commandPointer==historyCommand.size()-1){
             System.out.print("已经redo所有命令，无法继续");
         }else{

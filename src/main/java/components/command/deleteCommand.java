@@ -21,7 +21,7 @@ public class deleteCommand implements Command{
         }
     }
 
-    ////根据titleName去Label中查找对应<Item> obj_t
+    //根据titleName去Label中查找对应<Item> obj_t
     public Item find_title(Label bookMark, String titlename) {
         if(!bookMark.items.isEmpty()){
             for(Item obj_t : bookMark.items){
@@ -45,10 +45,28 @@ public class deleteCommand implements Command{
         return null;
     }
 
+    //根据titleName去Label中查找对应其父节点，并维护其父节点的sons字段
+    public void adjust_sons(Label bookMark, String titlename){
+        if(bookMark.items.isEmpty()){return;}
+        for(Item obj_t : bookMark.items){
+            for(Item temp : obj_t.sons){
+                if(titlename.equals(temp.title)){
+                    obj_t.sons.remove(temp);
+                    return ;
+                }
+            }
+        }
+
+    }
+
     @Override
     public void execute(Label bookMark) {
         if (cmdName.equals("delete-title ")){
             //执行delete-title指令
+            //维护其父节点的sons字段
+            adjust_sons(bookMark, titleName);
+
+
             //根据titleName去查找对应<Item> obj_t,将其从Label中删除
             Item obj_t = find_title(bookMark, titleName);
             bookMark.items.remove(obj_t); //从Label中删除该<Item> obj_t
@@ -56,18 +74,12 @@ public class deleteCommand implements Command{
                 bookMark.items.remove(find_title(bookMark, obj_t_son.title));
             }
 
-            System.out.print(cmdName+"\n"+titleName+"\n");
-
         } else if (cmdName.equals("delete-bookmark ")) {
             //执行delete-bookmark指令
-            //根据bookmarkname去查找对应<Item> obj_t,先将其bookmarkName和hyperlink压入栈中，然后删除obj_t的相关属性
+            //根据bookmarkname去查找对应<Item> obj_t,然后删除obj_t的相关属性
             Item obj_t = find_bookmark(bookMark, bookmarkname);
-//            bookmarkNameStack.push(obj_t.bookmarkName);
-//            hyperlinkNameStack.push(obj_t.hyperlink);
             obj_t.bookmarkName = null;
             obj_t.hyperlink = null;
-
-            System.out.print(cmdName+"\n"+bookmarkname+"\n");
 
         } else {
             System.out.print("this commandline is not exit");

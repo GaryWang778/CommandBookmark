@@ -23,7 +23,6 @@ public class commandLine {
             comParse.comParser();
 
             //依次输入指令
-            System.out.println("\n");
             System.out.println("please input order:  ");
         }
         scan.close();
