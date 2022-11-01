@@ -12,28 +12,26 @@ public class commandManager {
     private static final List<Command> historyCommand = new ArrayList<>();
     private static int commandPointer = 0;//指向的是下个command存储的位置
 
-    //创建Label对象，和根节点root
-    static Label bookMark = new Label();
-    static Item root = new Item();
 
-
-    public static void executeCommand(Command command) {
-        //将root根节点存储进Label
-        bookMark.items.add(root);
+    public static void executeCommand(Command command, Label bookMark) {
 
         if ((command instanceof addCommand) || (command instanceof deleteCommand)) {
             //新添加指令时，删除commandPointer及其之后的所有历史命令
-            for (int i = 0; i < historyCommand.size() - commandPointer; i++) {
+            for (int i = 0; i < historyCommand.size() - commandPointer; ) {
                 historyCommand.remove(commandPointer);
             }
             historyCommand.add(command);
             commandPointer += 1;
         }else if (command instanceof saveCommand){
+//            bookMark.items.add(root);
+
             //只有输入save指令时才会执行所有指令
             for(int i = 0; i < commandPointer; i++){
                 Command commandtoExecute = historyCommand.get(i);
                 commandtoExecute.execute(bookMark);
             }
+            commandPointer = 0;
+            historyCommand.clear();
             command.execute(bookMark);
         }else{
             command.execute(bookMark);
@@ -51,7 +49,7 @@ public class commandManager {
     }
 
     public static void redo() {
-        if(commandPointer==historyCommand.size()-1){
+        if(commandPointer==historyCommand.size()){
             System.out.print("已经redo所有命令，无法继续");
         }else{
             commandPointer++;

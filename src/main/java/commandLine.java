@@ -1,6 +1,9 @@
 //接收命令行的输入
 
 
+import dataStructure.Item;
+import dataStructure.Label;
+
 import java.util.Scanner;
 
 public class commandLine {
@@ -9,6 +12,11 @@ public class commandLine {
 
         // 接收指令
         System.out.println("please input order: ");
+
+        //创建Label对象，和根节点root
+        Label bookMark = new Label();
+        Item root = new Item();
+        bookMark.items.add(root);
 
         while (scan.hasNextLine()) {
             String order = scan.nextLine();
@@ -20,7 +28,7 @@ public class commandLine {
 
             //调用指令解析模块
             commandParse comParse = new commandParse(order);
-            comParse.comParser();
+            comParse.comParser(bookMark);
 
             //依次输入指令
             System.out.println("please input order:  ");
