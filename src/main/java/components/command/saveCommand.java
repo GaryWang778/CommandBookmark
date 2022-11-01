@@ -4,69 +4,75 @@ import dataStructure.Item;
 import dataStructure.Label;
 
 import java.io.*;
-import java.util.Stack;
+import java.util.ArrayList;
 
 //saveCommand：将Label中的数据刷新到文件中
 public class saveCommand implements Command{
-    public String cmdName;
-    public String filePath = "src/main/java/个人收藏.md";
+//    public String filePath;
 
-    public saveCommand(String[] list){
-        cmdName = list[0];
+
+    public Item find_title(Label bookMark, String titlename) {
+        if(!bookMark.items.isEmpty()){
+            for(Item obj_t : bookMark.items){
+                if(titlename.equals(obj_t.title)){
+                    return obj_t;
+                }
+            }
+        }
+        return null;
     }
-    //使用FileWriter不需要考虑原文件不存在的清空
-    //当该文件不存在时，new FileWriter(file)会自动创建一个真实存在的空文件
 
-    public void inputItem(Item a, String path, FileWriter fileWriter){
-        //将Item a以及其子节点写入到md文件中
+    public void inputItem (Label bookMark,FileWriter fileWriter, Item item, int level) throws IOException {
+        if (item == null){
+            return;
+        }
+        int next_level = level + 1;
+        Item temp1 = find_title(bookMark, item.title);
+        ArrayList<Item> item_son = item.sons;
+        for (int num = 1; num <= level; num++){
+            fileWriter.write("#");
+        }
+        fileWriter.write(" " + item.title + "    " + '\n');
+        if(item.bookmarkName != null){
+            fileWriter.write("[");
+            if (item.visited != 0){ fileWriter.write("*"); }
+            fileWriter.write(item.bookmarkName);
+            fileWriter.write("]");
+
+            fileWriter.write("(");
+            fileWriter.write(item.hyperlink);
+            fileWriter.write(")");
+            fileWriter.write('\n');
+        }
+
+        if (temp1 != null)
+            for (Item i : item_son) {
+                inputItem(bookMark, fileWriter, i, next_level);
+            }
+    }
+    @Override
+    public void execute(Label bookMark) {
+        File file = new File(bookMark.filepath);
+
+        Item root = bookMark.items.get(0);
+
         try {
-            fileWriter.write(a.title+"\n"+"["+a.bookmarkName+"]"+a.hyperlink);
+            //使用FileWriter不需要考虑原文件不存在的清空
+            //当该文件不存在时，new FileWriter(file)会自动创建一个真实存在的空文件
+            FileWriter fileWriter = new FileWriter(file);
+            //往文件重写内容
+            fileWriter.write("");
+            fileWriter.flush(); //强制刷出缓冲池中的数据
+
+            //依次遍历一级标题
+            for (Item i : root.sons){
+                inputItem(bookMark, fileWriter, i, 1);
+            }
             fileWriter.flush();
 
         }catch (IOException e){
             e.printStackTrace();
-
         }
 
-
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
-
-
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    @Override
-    public void execute(Label bookMark) {
-        //采用深度优先搜索算法
-        //申请一个栈存储访问过的节点
-        Stack<Item> DFS = new Stack<>();
-        if(!bookMark.items.isEmpty()){
-            DFS.push(bookMark.items.get(0));
-        }
-
-        File file = new File("src/main/java/个人收藏.md");
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            //往文件重写内容
-            fileWriter.write("");
-            fileWriter.flush(); //强制刷出缓冲池中的数据,清空
-
-            while (!DFS.isEmpty()){
-                Item node = DFS.pop();
-                inputItem(node, filePath, fileWriter);
-                //然后考虑子节点
-                for(Item son:node.sons){
-                    DFS.push(son);
-                }
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        System.out.print(cmdName+"\n"+filePath+"\n");
     }
 }
