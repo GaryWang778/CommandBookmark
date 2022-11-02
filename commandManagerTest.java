@@ -1,5 +1,6 @@
 package components.command;
 
+import dataStructure.Label;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class commandManagerTest {
     private String[] list = {""};
+    private Label bookmark;
     addCommand addCommand = new addCommand(list);
     deleteCommand deleteCommand = new deleteCommand(list);
 
     @Test
     void undo1() {
+        commandManager.clealAll();
         List<Command> expectedCommand = new ArrayList<>();
-        commandManager.executeCommand(addCommand);
+        commandManager.executeCommand(addCommand,bookmark);
         expectedCommand.add(addCommand);
         Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"命令插入失败");
 
@@ -26,9 +29,10 @@ class commandManagerTest {
     }
     @Test
     void undo2() {
+        commandManager.clealAll();
         List<Command> expectedCommand = new ArrayList<>();
-        commandManager.executeCommand(addCommand);
-        commandManager.executeCommand(deleteCommand);
+        commandManager.executeCommand(addCommand,bookmark);
+        commandManager.executeCommand(deleteCommand,bookmark);
         expectedCommand.add(addCommand);
         expectedCommand.add(deleteCommand);
 
@@ -41,8 +45,9 @@ class commandManagerTest {
 
     @Test
     void redo1() {
+        commandManager.clealAll();
         List<Command> expectedCommand = new ArrayList<>();
-        commandManager.executeCommand(addCommand);
+        commandManager.executeCommand(addCommand,bookmark);
         expectedCommand.add(addCommand);
         Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"命令插入失败");
 
@@ -53,9 +58,10 @@ class commandManagerTest {
 
     @Test
     void redo2() {
+        commandManager.clealAll();
         List<Command> expectedCommand = new ArrayList<>();
-        commandManager.executeCommand(addCommand);
-        commandManager.executeCommand(deleteCommand);
+        commandManager.executeCommand(addCommand,bookmark);
+        commandManager.executeCommand(deleteCommand,bookmark);
         expectedCommand.add(addCommand);
         expectedCommand.add(deleteCommand);
 
