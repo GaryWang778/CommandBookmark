@@ -14,7 +14,7 @@ class commandManagerTest {
     deleteCommand deleteCommand = new deleteCommand(list);
 
     @Test
-    void undo() {
+    void undo1() {
         List<Command> expectedCommand = new ArrayList<>();
         commandManager.executeCommand(addCommand);
         expectedCommand.add(addCommand);
@@ -24,9 +24,23 @@ class commandManagerTest {
         expectedCommand.remove(addCommand);
         Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"undo失败");
     }
+    @Test
+    void undo2() {
+        List<Command> expectedCommand = new ArrayList<>();
+        commandManager.executeCommand(addCommand);
+        commandManager.executeCommand(deleteCommand);
+        expectedCommand.add(addCommand);
+        expectedCommand.add(deleteCommand);
+
+        commandManager.undo();
+        commandManager.undo();
+        expectedCommand.remove(addCommand);
+        expectedCommand.remove(deleteCommand);
+        Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"undo失败");
+    }
 
     @Test
-    void redo() {
+    void redo1() {
         List<Command> expectedCommand = new ArrayList<>();
         commandManager.executeCommand(addCommand);
         expectedCommand.add(addCommand);
@@ -34,6 +48,22 @@ class commandManagerTest {
 
         commandManager.undo();
         commandManager.redo();
+        Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"redo失败");
+    }
+
+    @Test
+    void redo2() {
+        List<Command> expectedCommand = new ArrayList<>();
+        commandManager.executeCommand(addCommand);
+        commandManager.executeCommand(deleteCommand);
+        expectedCommand.add(addCommand);
+        expectedCommand.add(deleteCommand);
+
+        commandManager.undo();
+        commandManager.undo();
+        commandManager.redo();
+        expectedCommand.remove(deleteCommand);
+
         Assertions.assertIterableEquals(expectedCommand,commandManager.getHistoryCommands(),"redo失败");
     }
 }
