@@ -9,10 +9,11 @@ public class commandParse {
         this.commandline = commandline;
     }
 
-    //根据空格对commandline进行划分
+    //根据引号对commandline进行划分
     public String[] split(String commandline) {
         return commandline.split("\"");
     }
+    public String[] splitopencommand(String commandline){return commandline.split(" ");}
 
     //对commandline的命令符进行判断
     public void comParser(Label bookMark){
@@ -48,7 +49,7 @@ public class commandParse {
             commandManager.executeCommand(new readCommand(list), bookMark);
         }else if(commandline.contains("open")){
             //open指令
-            String[] list = split(commandline);
+            String[] list = splitopencommand(commandline);
             commandManager.executeCommand(new openCommand(list), bookMark);
 
         }else{

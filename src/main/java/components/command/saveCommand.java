@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 //saveCommand：将Label中的数据刷新到文件中
 public class saveCommand implements Command{
-    public String filePath = "src/main/java/个人收藏.md";
+//    public String filePath;
 
 
     public Item find_title(Label bookMark, String titlename) {
@@ -52,7 +52,7 @@ public class saveCommand implements Command{
     }
     @Override
     public void execute(Label bookMark) {
-        File file = new File(filePath);
+        File file = new File(bookMark.filepath);
 
         Item root = bookMark.items.get(0);
 

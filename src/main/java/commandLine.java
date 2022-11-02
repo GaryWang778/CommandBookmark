@@ -16,6 +16,7 @@ public class commandLine {
         //创建Label对象，和根节点root
         Label bookMark = new Label();
         Item root = new Item();
+        root.title = "根节点";
         bookMark.items.add(root);
 
         while (scan.hasNextLine()) {
