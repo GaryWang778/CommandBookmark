@@ -1,5 +1,6 @@
 //命令解析模块
 import components.command.*;
+import components.command.bookmarkCommand;
 import dataStructure.Label;
 
 public class commandParse {
@@ -51,6 +52,11 @@ public class commandParse {
             //open指令
             String[] list = splitopencommand(commandline);
             commandManager.executeCommand(new openCommand(list), bookMark);
+
+        } else if(commandline.contains("bookmark")){
+            //open指令
+            String[] list = splitopencommand(commandline);
+            commandManager.executeCommand(new bookmarkCommand(list), bookMark);
 
         }else{
             System.out.println("this commandline is not exit");
