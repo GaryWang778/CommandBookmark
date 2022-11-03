@@ -1,3 +1,4 @@
+
 package components.command;
 import dataStructure.Item;
 import dataStructure.Label;
@@ -16,11 +17,14 @@ public class readCommand implements Command{
 
     @Override
     public void execute(Label bookMark) {
-        for(Item i : bookMark.items){
-            if(i.bookmarkName.equals(bookmarkname)){
-                i.visited++;
+        if(bookMark.items.size() > 0){
+            for(Item i : bookMark.items.subList(1,bookMark.items.size())){
+                if(i.bookmarkName.equals(bookmarkname)){
+                    i.visited++;
+                }
             }
         }
+
     }
 
 }
