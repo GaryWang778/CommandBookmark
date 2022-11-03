@@ -2,6 +2,8 @@ package components.command;
 import dataStructure.Item;
 import dataStructure.Label;
 
+import javax.swing.plaf.PanelUI;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,4 +58,12 @@ public class commandManager {
             System.out.print("redo success!\n");
         }
     }
+    public static List<Command> getHistoryCommands(){
+        return historyCommand.subList(0,commandPointer);
+    }
+    public static void clealAll(){
+        historyCommand.clear();
+        commandPointer = 0;
+    }
+
 }
