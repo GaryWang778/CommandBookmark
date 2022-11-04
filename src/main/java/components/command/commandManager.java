@@ -24,7 +24,7 @@ public class commandManager {
             }
             historyCommand.add(command);
             commandPointer += 1;
-        }else if (command instanceof saveCommand){
+        }else if (command instanceof saveCommand || command instanceof vision){
 //            bookMark.items.add(root);
 
             //只有输入save指令时才会执行所有指令

@@ -32,10 +32,10 @@ public class saveCommand implements Command{
         for (int num = 1; num <= level; num++){
             fileWriter.write("#");
         }
-        fileWriter.write(" " + item.title + "    " + '\n');
+        fileWriter.write(" " + item.title +'\n');
         if(item.bookmarkName != null){
             fileWriter.write("[");
-            if (item.visited != 0){ fileWriter.write("*"); }
+//            if (item.visited != 0){ fileWriter.write("*"); }
             fileWriter.write(item.bookmarkName);
             fileWriter.write("]");
 

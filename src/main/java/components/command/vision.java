@@ -45,9 +45,6 @@ public class vision implements Command {
         for (int num = 1; num < level; num++){
             System.out.print("\t|");
         }
-//        for (int num = 1; num <= level; num++){
-//            System.out.print("\t|");
-//        }
         System.out.print("-" + item.title +'\n');
 
         if (temp1 != null)

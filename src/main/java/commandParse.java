@@ -48,7 +48,7 @@ public class commandParse {
             //read-bookmark指令
             String[] list = split(commandline);
             commandManager.executeCommand(new readCommand(list), bookMark);
-        }else if(commandline.contains("open")){
+        }else if(commandline.startsWith("open")){
             //open指令
             String[] list = splitopencommand(commandline);
             commandManager.executeCommand(new openCommand(list), bookMark);
