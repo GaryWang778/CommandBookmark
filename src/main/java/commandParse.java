@@ -50,7 +50,7 @@ public class commandParse {
             commandManager.executeCommand(new readCommand(list), bookMark);
         }else if(commandline.startsWith("open")){
             //open指令
-            String[] list = splitopencommand(commandline);
+            String[] list = split(commandline);
             commandManager.executeCommand(new openCommand(list), bookMark);
 
         } else if(commandline.contains("bookmark")){
